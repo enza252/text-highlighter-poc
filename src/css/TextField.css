@@ -1,0 +1,46 @@
+.gridClass {
+  padding: 20px !important;
+}
+
+.textField {
+  padding-bottom: 10px !important;
+  align-items: center !important;
+  border: solid !important;
+  border-color: black !important;
+  justify-content: center !important;
+}
+
+.paperContainer {
+  padding: 180px !important;
+}
+
+.paperResults {
+  padding: 100px !important;
+  margin-top: 100px !important;
+  border-color: black !important;
+  border: solid !important;
+}
+
+.typoText,
+.highlightedTextHelper {
+  padding: 10px !important;
+}
+
+.title {
+  padding-bottom: 10px !important;
+}
+
+.highlighter {
+  padding: 50px !important;
+}
+
+.chipGrid {
+  padding: 20px !important;
+}
+
+.title,
+.chipGrid,
+.highlightedTextHelper,
+.highlighter {
+  text-align: center !important;
+}

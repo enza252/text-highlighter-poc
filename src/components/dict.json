@@ -1,0 +1,15 @@
+{
+  "colours": [
+    "red",
+    "yellow",
+    "pink",
+    "green",
+    "blue",
+    "purple",
+    "brown",
+    "black",
+    "white"
+  ],
+  "names": ["fred", "jonathan", "simon", "georgia", "sahil"],
+  "animals": ["cat", "dog", "elephant", "giraffe", "fox"]
+}
