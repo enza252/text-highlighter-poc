@@ -30,22 +30,9 @@ class IndexPage extends React.Component {
     showNameResult: false
   };
 
-  handleChange = () => event => {
-    this.setState({
-      textBoxContents: event.target.value
-    });
-
+  componentDidMount = () => {
     let tempWordArray = [];
     let wordArray = [];
-    let tempMatchedCategoriesArray = [];
-    let textBoxContentString = this.state.textBoxContents.toString();
-
-    if (textBoxContentString === null || textBoxContentString === "") {
-      console.log("Please enter something in the text box");
-      return;
-    }
-    const textBoxWordArray = textBoxContentString.split(" ");
-    this.setState({ textBoxContentsArray: textBoxWordArray });
 
     Object.entries(data).forEach(entry => {
       entry[1].forEach(value => {
@@ -62,6 +49,22 @@ class IndexPage extends React.Component {
         categories: categories
       });
     });
+  };
+
+  handleChange = () => event => {
+    this.setState({
+      textBoxContents: event.target.value
+    });
+
+    let tempMatchedCategoriesArray = [];
+    let textBoxContentString = this.state.textBoxContents.toString();
+
+    if (textBoxContentString === null || textBoxContentString === "") {
+      console.log("Please enter something in the text box");
+      return;
+    }
+    const textBoxWordArray = textBoxContentString.split(" ");
+    this.setState({ textBoxContentsArray: textBoxWordArray });
 
     if (
       this.state.textBoxContentsArray !== [] &&

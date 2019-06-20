@@ -10,6 +10,27 @@
     "black",
     "white"
   ],
-  "names": ["fred", "jonathan", "simon", "georgia", "sahil"],
-  "animals": ["cat", "dog", "elephant", "giraffe", "fox"]
+  "names": [
+    "Fred",
+    "Jonathan",
+    "Simon",
+    "Georgia",
+    "Sahil",
+    "Ian",
+    "Bob",
+    "Charlie"
+  ],
+  "animals": [
+    "cat",
+    "dog",
+    "elephant",
+    "giraffe",
+    "fox",
+    "hamster",
+    "rabbit",
+    "gerbil",
+    "lion",
+    "tiger",
+    "deer"
+  ]
 }
