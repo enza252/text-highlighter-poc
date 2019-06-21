@@ -12,26 +12,18 @@ import data from "./dict.json";
 // import styles
 import "../css/TextField.css";
 
-let dictArray = [];
-let categories = [];
-
-// const dictionary =
-//   '{"colours": ["red", "yellow","pink", "green", "blue", "purple", "brown", "black", "white"], "names": ["fred", "jonathan","simon","georgia","sahil"],"animals":["cat","dog","elephant","giraffe","fox"]}';
+const _ = require("lodash");
 
 class IndexPage extends React.Component {
   state = {
     textBoxContents: "",
     textBoxContentsArray: [],
     words: ["default", "words"],
-    categories: [],
-    categoriesToDisplay: [],
-    showColourResult: false,
-    showAnimalResult: false,
-    showNameResult: false
+    categoriesToDisplay: []
   };
 
   componentDidMount = () => {
-    let tempWordArray = [];
+    const tempWordArray = [];
     let wordArray = [];
 
     Object.entries(data).forEach(entry => {
@@ -41,54 +33,54 @@ class IndexPage extends React.Component {
         this.setState({ words: wordArray });
       });
     });
+  };
 
-    Object.keys(data).forEach(key => {
-      dictArray.push(key);
-      categories = dictArray.slice();
-      this.setState({
-        categories: categories
-      });
+  resetState = () => {
+    this.setState({
+      categoriesToDisplay: [],
+      textBoxContents: ""
     });
   };
 
   handleChange = () => event => {
+    this.resetState();
     this.setState({
       textBoxContents: event.target.value
     });
+    const textBoxContents = event.target.value;
 
-    let tempMatchedCategoriesArray = [];
-    let textBoxContentString = this.state.textBoxContents.toString();
+    const tempMatchedCategoriesArray = [];
 
-    if (textBoxContentString === null || textBoxContentString === "") {
+    if (!textBoxContents || textBoxContents !== "") {
+      const textBoxWordArray = textBoxContents.split(" ");
+
+      if (
+        textBoxWordArray !== [] &&
+        this.state.words !== ["default", "words"]
+      ) {
+        const intersection = textBoxWordArray.filter(element =>
+          this.state.words.includes(element)
+        );
+
+        Object.entries(data).forEach(entry => {
+          _.forEach(intersection, matchingWord => {
+            if (entry[1].includes(matchingWord)) {
+              tempMatchedCategoriesArray.push(entry[0]);
+              this.setState({
+                categoriesToDisplay: tempMatchedCategoriesArray
+              });
+            }
+          });
+        });
+      }
+    } else {
       console.log("Please enter something in the text box");
       return;
-    }
-    const textBoxWordArray = textBoxContentString.split(" ");
-    this.setState({ textBoxContentsArray: textBoxWordArray });
-
-    if (
-      this.state.textBoxContentsArray !== [] &&
-      this.state.words !== ["default", "words"]
-    ) {
-      const intersection = this.state.textBoxContentsArray.filter(element =>
-        this.state.words.includes(element)
-      );
-
-      Object.entries(data).forEach(entry => {
-        intersection.forEach(matchingWord => {
-          if (entry[1].includes(matchingWord)) {
-            tempMatchedCategoriesArray.push(entry[0]);
-            this.setState({
-              categoriesToDisplay: tempMatchedCategoriesArray
-            });
-          }
-        });
-      });
     }
   };
 
   render() {
-    let elements = this.state.categoriesToDisplay.map(item => (
+    const elements = _.map(this.state.categoriesToDisplay, item => (
       <Chip label={item} key={item} />
     ));
 
